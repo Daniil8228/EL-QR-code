@@ -17,25 +17,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         .container {
             text-align: center;
             background: #800000;
             color: #fff;
-            padding: 30px;
+            padding: 30px 20px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-            width: 465px;
-            height: 845px;
+            width: 100%;
+            max-width: 465px;
+            box-sizing: border-box;
         }
 
         .logo {
             display: block;
-            margin: 0 auto;
+            margin: 0 auto 20px auto;
             max-width: 150px;
-            margin-bottom: 20px;
             border-radius: 50%;
         }
 
@@ -69,13 +69,14 @@
         ul {
             list-style: none;
             padding: 0;
+            margin: 0 0 20px 0;
         }
 
         li {
             margin: 15px 0;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
         }
 
         .button {
@@ -91,8 +92,7 @@
             color: #fff;
             background: linear-gradient(90deg, #001F3F, #007BFF);
             text-decoration: none;
-            width: calc(100% - 40px);
-            height: 50px;
+            width: 100%;
             box-sizing: border-box;
             overflow: hidden;
             transition: all 0.3s ease-in-out;
@@ -124,6 +124,7 @@
             box-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
             animation: spin 2s linear infinite;
             z-index: 1;
+            pointer-events: none;
         }
 
         .button:hover {
@@ -132,12 +133,8 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .subscribe-btn {
@@ -151,6 +148,7 @@
             cursor: pointer;
             transition: all 0.3s ease-in-out;
             text-decoration: none;
+            z-index: 2;
         }
 
         .subscribe-btn:hover {
@@ -158,34 +156,21 @@
         }
 
         .confirm-btn {
-            background: #FFC107;
-            color: #800000;
-            border: none;
-            padding: 5px 10px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            display: none;
-        }
-
-        .confirm-btn:hover {
-            background: #FFB400;
+            display: none; /* оставляем, но не используем */
         }
 
         .bonus-btn {
-            margin-top: 20px;
+            margin-top: 10px;
             background-color: #FFD700;
             color: #800000;
             padding: 12px 20px;
             font-size: 16px;
             font-weight: bold;
-            border: none;
             border-radius: 10px;
             cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
             display: inline-block;
+            text-decoration: none;
         }
 
         .confirmed {
@@ -194,9 +179,19 @@
             font-weight: bold;
             display: none;
             margin-left: auto;
+            z-index: 2;
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                padding: 25px 15px;
+                border-radius: 15px;
+            }
+
             .logo-text {
                 font-size: 32px;
             }
@@ -207,7 +202,7 @@
 
             .button {
                 font-size: 16px;
-                padding: 10px;
+                padding: 12px 14px;
             }
 
             .button img {
@@ -224,74 +219,89 @@
 </head>
 <body>
 <div class="container">
-    <img src="https://elektromassivebucketproduction.s3.eu-central-1.amazonaws.com/shared/logo.jpg" alt="ElektroMassive Logo" class="logo">
+    <img src="https://media.elektromassive.com/media/%D0%BB%D0%BE%D0%B3%D0%BE.png" alt="ElektroMassive Logo" class="logo">
     <div class="logo-text"><span>ELEKTRO</span> MASSIVE</div>
     <div class="gradient-text">Все для електрики: зручно, якісно, доступно! ✅</div>
+
     <ul>
         <li>
             <div class="button">
-                <img src="https://elektromassivebucketproduction.s3.eu-central-1.amazonaws.com/shared/icon-site.jpg" alt="Website Icon">
-                <a href="https://elektromassive.com" target="_blank" style="flex-grow: 1; text-decoration: none; color: white;">Сайт - ELEKTRO-MASSIVE</a>
+                <img src="https://media.elektromassive.com/media/%D0%BB%D0%BE%D0%B3%D0%BE.png" alt="Website Icon">
+                <a href="https://elektromassive.com" target="_blank" style="flex-grow: 1; text-decoration: none; color: white; z-index:2;">
+                    Сайт - ELEKTRO-MASSIVE
+                </a>
             </div>
         </li>
+
         <li>
             <div class="button">
-                <img src="https://elektromassivebucketproduction.s3.eu-central-1.amazonaws.com/shared/facebook.png" alt="Facebook Icon">
+                <img src="https://media.elektromassive.com/media/facebook.avif" alt="Facebook Icon">
                 <span>Facebook</span>
-                <a href="https://www.facebook.com/elektromassive/" target="_blank" class="subscribe-btn" onclick="showConfirm(this)">Підписатися</a>
-                <button class="confirm-btn" onclick="handleConfirm(this)">Підтвердити</button>
+                <a href="https://www.facebook.com/elektromassive/" target="_blank"
+                   class="subscribe-btn" onclick="handleSubscribe(this)">Підписатися</a>
+                <button class="confirm-btn">Підтвердити</button>
                 <span class="confirmed">✔</span>
             </div>
         </li>
+
         <li>
             <div class="button">
-                <img src="https://elektromassivebucketproduction.s3.eu-central-1.amazonaws.com/shared/instagram.png" alt="Instagram Icon">
+                <img src="https://media.elektromassive.com/media/%D0%B8%D0%BD%D1%81%D1%82%D0%B0.jpg" alt="Instagram Icon">
                 <span>Instagram</span>
-                <a href="https://www.instagram.com/elektromassive/" target="_blank" class="subscribe-btn" onclick="showConfirm(this)">Підписатися</a>
-                <button class="confirm-btn" onclick="handleConfirm(this)">Підтвердити</button>
+                <a href="https://www.instagram.com/elektromassive/" target="_blank"
+                   class="subscribe-btn" onclick="handleSubscribe(this)">Підписатися</a>
+                <button class="confirm-btn">Підтвердити</button>
                 <span class="confirmed">✔</span>
             </div>
         </li>
+
         <li>
             <div class="button">
-                <img src="https://elektromassivebucketproduction.s3.eu-central-1.amazonaws.com/shared/tiktok.png" alt="TikTok Icon">
+                <img src="https://media.elektromassive.com/media/%D1%82%D0%B8%D0%BA%20%D1%82%D0%BE%D0%BA.avif" alt="TikTok Icon">
                 <span>TikTok</span>
-                <a href="https://www.tiktok.com/@elektromassive" target="_blank" class="subscribe-btn" onclick="showConfirm(this)">Підписатися</a>
-                <button class="confirm-btn" onclick="handleConfirm(this)">Підтвердити</button>
+                <a href="https://www.tiktok.com/@elektromassive" target="_blank"
+                   class="subscribe-btn" onclick="handleSubscribe(this)">Підписатися</a>
+                <button class="confirm-btn">Підтвердити</button>
                 <span class="confirmed">✔</span>
             </div>
         </li>
+
         <li>
             <div class="button">
-                <img src="https://elektromassivebucketproduction.s3.eu-central-1.amazonaws.com/shared/%D1%8E%D1%82%D1%83%D0%B1.png" alt="YouTube Icon">
+                <img src="https://media.elektromassive.com/media/%D1%8E%D1%82%D1%83%D1%8E.png" alt="YouTube Icon">
                 <span>YouTube</span>
-                <a href="https://www.youtube.com/channel/UCehtIRJUdS6tjDR38ciWkSw" target="_blank" class="subscribe-btn" onclick="showConfirm(this)">Підписатися</a>
-                <button class="confirm-btn" onclick="handleConfirm(this)">Підтвердити</button>
+                <a href="https://www.youtube.com/channel/UCehtIRJUdS6tjDR38ciWkSw" target="_blank"
+                   class="subscribe-btn" onclick="handleSubscribe(this)">Підписатися</a>
+                <button class="confirm-btn">Підтвердити</button>
                 <span class="confirmed">✔</span>
             </div>
         </li>
+
         <li>
             <div class="button">
-                <img src="https://elektromassivebucketproduction.s3.eu-central-1.amazonaws.com/shared/%D1%82%D0%B5%D0%BB%D0%B5%D0%B3%D1%80%D0%B0%D0%BC.png" alt="Telegram Icon">
+                <img src="https://media.elektromassive.com/media/%D1%82%D0%B3.png" alt="Telegram Icon">
                 <span>Telegram</span>
-                <a href="https://t.me/elektromassive" target="_blank" class="subscribe-btn" onclick="showConfirm(this)">Підписатися</a>
-                <button class="confirm-btn" onclick="handleConfirm(this)">Підтвердити</button>
+                <a href="https://t.me/elektromassive" target="_blank"
+                   class="subscribe-btn" onclick="handleSubscribe(this)">Підписатися</a>
+                <button class="confirm-btn">Підтвердити</button>
                 <span class="confirmed">✔</span>
             </div>
         </li>
     </ul>
-    <div id="bonus-section" class="bonus-btn">Підписуйся та отримуй подарунок 🎁</div>
-</div>
-<script>
-    function showConfirm(link) {
-        link.style.display = 'none';
-        const confirmButton = link.nextElementSibling;
-        confirmButton.style.display = 'inline-block';
-    }
 
-    function handleConfirm(button) {
-        button.style.display = 'none';
-        const checkmark = button.nextElementSibling;
+    <!-- Сразу ссылка на бота -->
+    <a id="bonus-section" class="bonus-btn" href="https://t.me/ElektroMassive_bot" target="_blank">
+        Підписуйся та отримуй подарунок 🎁
+    </a>
+</div>
+
+<script>
+    // Клик по "Підписатися": сразу ставим галочку и считаем как подтверждение
+    function handleSubscribe(link) {
+        link.style.display = 'none';
+        const confirmButton = link.nextElementSibling; // скрытая "Підтвердити"
+        const checkmark = confirmButton.nextElementSibling;
+
         checkmark.style.display = 'inline-block';
         checkBonus();
     }
@@ -299,10 +309,11 @@
     function checkBonus() {
         const allConfirmed = document.querySelectorAll('.confirmed');
         const allVisible = Array.from(allConfirmed).every(el => el.style.display === 'inline-block');
+
         if (allVisible) {
             const bonusSection = document.getElementById('bonus-section');
-            bonusSection.innerHTML = '<a href="https://t.me/ElektroMassive_bot" target="_blank" style="text-decoration: none; color: #800000;">Забрати бонус 🎁</a>';
-            bonusSection.style.backgroundColor = '#FFD700';
+            bonusSection.textContent = 'Забрати бонус 🎁';
+            // ссылка уже есть с самого начала
         }
     }
 </script>
